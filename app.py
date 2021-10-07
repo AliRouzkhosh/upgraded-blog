@@ -12,8 +12,8 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from flask_gravatar import Gravatar
 import os
 
-EMAIL = os.environ["EMAIL"]
-PASSWORD = os.environ["PASSWORD"]
+EMAIL = os.environ.get("EMAIL")
+PASSWORD = os.environ.get("PASSWORD")
 login_manager = LoginManager()
 app = Flask(__name__)
 login_manager.init_app(app)
