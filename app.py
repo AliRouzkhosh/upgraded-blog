@@ -58,7 +58,7 @@ class Comments(db.Model):
 
 db.create_all()
 
-print(5)
+
 class Form(FlaskForm):
     title = StringField(label="Title", validators=[DataRequired()])
     subtitle = StringField(label="Subtitle", validators=[DataRequired()])
