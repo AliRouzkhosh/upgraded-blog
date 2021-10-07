@@ -10,11 +10,12 @@ from datetime import datetime
 from flask_login import LoginManager, login_required, logout_user, login_user, UserMixin, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_gravatar import Gravatar
+import os
 
-
-EMAIL = "dumy.aliulmg4@gmail.com"
-PASSWORD = "dm06gheA1p)T*"
-
+EMAIL = os.environ["EMAIL"]
+PASSWORD = os.environ["PASSWORD"]
+print(EMAIL)
+print(PASSWORD)
 login_manager = LoginManager()
 app = Flask(__name__)
 login_manager.init_app(app)
