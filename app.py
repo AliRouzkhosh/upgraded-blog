@@ -14,8 +14,6 @@ import os
 
 EMAIL = os.environ["EMAIL"]
 PASSWORD = os.environ["PASSWORD"]
-print(EMAIL)
-print(PASSWORD)
 login_manager = LoginManager()
 app = Flask(__name__)
 login_manager.init_app(app)
