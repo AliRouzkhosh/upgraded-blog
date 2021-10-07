@@ -1,0 +1,100 @@
+{% import "bootstrap/wtf.html" as wtf %}
+<!DOCTYPE html>
+<html lang="en">
+{% include 'header.html' %}
+        <!-- Page Header-->
+                <header class="masthead" style="background-image: url({{blog.image }})">
+                    <div class="container position-relative px-4 px-lg-5">
+                        <div class="row gx-4 gx-lg-5 justify-content-center">
+                            <div class="col-md-10 col-lg-8 col-xl-7">
+                                <div class="post-heading">
+                                    <h1>{{ blog.title }}</h1>
+                                    <h2 class="subheading">{{ blog.subtitle }}</h2>
+                                    <span class="meta">
+                                        Posted by
+                                        <a href="#!">{{ blog.author }}</a>
+                                        on {{ blog.dates }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <!-- Post Content-->
+                <article class="mb-4">
+                    <div class="container px-4 px-lg-5">
+                        <div class="row gx-4 gx-lg-5 justify-content-center">
+                            <div class="col-md-10 col-lg-8 col-xl-7">
+                                {{ blog.body|safe }}
+                            </div>
+                        </div>
+                        {% if user_id == blog.author_id %}
+                        <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase"  href="{{ url_for('edit', p_id=blog.id) }}">Edit</a></div>
+                        {% endif %}
+                        <div class="row gx-4 gx-lg-5 justify-content-center">
+                            <div class="col-md-10 col-lg-8 col-xl-7" style="line-height: .5rem">
+                                <hr>
+                                {{ wtf.quick_form(form, button_map={'submit':'primary'}, novalidate=True) }}
+                                {{ ckeditor.load(pkg_type="standard") }}
+                                <hr>
+                                {% for comment in blog.comments %}
+                                    <hr>
+                                    <div class="row">
+                                    <div class="commenterImage col-2" style="margin: auto">
+                                        <img src="{{  comment.comment_author.email| gravatar }}" style="border-radius: 100%"/>
+                                    </div>
+                                    <div class="col">
+                                        <h5>{{ comment.text|safe }}</h5>
+                                        <p class="text-muted">{{ comment.author }}</p>
+                                    </div>
+                                    <hr>
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2021</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
