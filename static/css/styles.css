@@ -298,6 +298,7 @@ figure {
 img,
 svg {
   vertical-align: middle;
+  width: 90%;
 }
 
 table {
@@ -11246,4 +11247,9 @@ header.masthead .site-heading .h1 {
 }
 .flash {
   color: #b02a37;
+}
+@media (max-width: 600px) {
+    image {
+        width: content-box;
+    }
 }

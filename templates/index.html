@@ -38,7 +38,11 @@
                     <hr class="my-4" />
                     {% endfor %}
                     <!-- Pager-->
-                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{{ url_for('new_post') }}">Add New Post</a></div>
+                    {% if logedin %}
+                        <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{{ url_for('new_post') }}">Add New Post</a></div>
+                    {% else %}
+                         <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{{ url_for('login') }}">Register to add new posts!</a></div>
+                    {% endif %}
                 </div>
             </div>
         </div>

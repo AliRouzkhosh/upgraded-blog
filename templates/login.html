@@ -29,6 +29,8 @@
                         {% endwith %}
                         {{ wtf.quick_form(form, button_map={'submit':'primary'}, novalidate=True) }}
                         {{ ckeditor.load(pkg_type="standard") }}
+                        <p>have'nt register yet?</p>
+                        <a class="btn btn-primary" href="{{ url_for('register') }}">Register now!</a>
                     </div>
                 </div>
             </div>
