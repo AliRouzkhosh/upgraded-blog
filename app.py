@@ -208,11 +208,14 @@ def post_page(a_id):
                 return render_template("post.html", blog=blogs, logedin=logedin, user_id=user_id, form=form)
     else:
         if form.validate_on_submit():
-            comment = request.form.get("comment")
-            new_comment = Comments(author_id=current_user.id, post_id=a_id, text=comment, author=current_user.name)
-            db.session.add(new_comment)
-            db.session.commit()
-            return redirect(url_for("post_page", a_id=a_id))
+            if current_user.is_authenticated:
+                comment = request.form.get("comment")
+                new_comment = Comments(author_id=current_user.id, post_id=a_id, text=comment, author=current_user.name)
+                db.session.add(new_comment)
+                db.session.commit()
+                return redirect(url_for("post_page", a_id=a_id))
+            else:
+                return redirect(url_for("login"))
         else:
             for blogs in data:
                 if int(a_id) == int(blogs.id):
