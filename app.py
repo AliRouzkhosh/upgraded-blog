@@ -112,15 +112,17 @@ def contact():
         email = dat["email"]
         phone = dat["phone"]
         text = dat["text"]
-        print(name, email, phone, text)
-        with SMTP("smtp.gmail.com") as connect:
-            connect.starttls()
-            connect.login(user=EMAIL, password=PASSWORD)
-            connect.sendmail(from_addr=EMAIL, to_addrs="aliulmg4@gmail.com",
-                             msg=f"Subject:New massage!!\n\nName:{name}\n"
-                             f"email: {email}\nphone: {phone}\n"
-                             f"massage: {text}")
-        return render_template('contact.html', massage=1, logedin=logedin)
+        try:
+            with SMTP("smtp.mail.yahoo.com") as connect:
+                connect.starttls()
+                connect.login(user=EMAIL, password=PASSWORD)
+                connect.sendmail(from_addr=EMAIL, to_addrs="aliulmg4@gmail.com",
+                                 msg=f"Subject:New massage!!\n\nName:{name}\n"
+                                 f"email: {email}\nphone: {phone}\n"
+                                 f"massage: {text}")
+            return render_template('contact.html', massage=1, logedin=logedin)
+        except:
+            return render_template("contact.html", massage=3, logedin=logedin)
     else:
         return render_template('contact.html', massage=2, logedin=logedin)
 
